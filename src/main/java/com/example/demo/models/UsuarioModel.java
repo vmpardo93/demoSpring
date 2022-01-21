@@ -1,4 +1,6 @@
 package com.example.demo.models;
+import java.time.LocalDate;
+import java.time.Period;
 import javax.persistence.*;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -12,10 +14,12 @@ public class UsuarioModel {
     private String nombre;
     private String apellido;
     private String tipoDoc;
-    private DateFormatUtils fechaNacimiento;
-    private DateFormatUtils fechaVinculacion;
+    private String fechaNacimiento;
+    private String fechaVinculacion;
     private String cargo;
     private float salario;
+    private String tiempovinculacion;
+    private String edad;
 
     public long getId() {
         return id;
@@ -35,16 +39,16 @@ public class UsuarioModel {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-    public DateFormatUtils getFechaVinculacion() {
+    public String getFechaVinculacion() {
         return fechaVinculacion;
     }
-    public void setFechaVinculacion(DateFormatUtils fechaVinculacion) {
+    public void setFechaVinculacion(String fechaVinculacion) {
         this.fechaVinculacion = fechaVinculacion;
     }
-    public DateFormatUtils getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
-    public void setFechaNacimiento(DateFormatUtils fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
     public String getTipoDoc() {
@@ -64,6 +68,24 @@ public class UsuarioModel {
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public String getEdad() {
+        return edad;
+    }
+    public void setEdad(float edad) {
+        LocalDate fechaNac = LocalDate.parse(fechaNacimiento);
+        LocalDate ahora = LocalDate.now();
+        Period periodo = Period.between(fechaNac, ahora);
+        this.edad = "Edad:"+ periodo.getYears() +"/"+ periodo.getMonths() +"/"+ periodo.getDays();
+    }
+    public String getTiempovinculacion() {
+        return tiempovinculacion;
+    }
+    public void setTiempovinculacion(float tiempovinculacion) { 
+        LocalDate fechaVin = LocalDate.parse(fechaVinculacion);
+        LocalDate ahora = LocalDate.now();
+        Period periodo = Period.between(fechaVin, ahora);
+        this.tiempovinculacion = "Tiempo con la empresa:"+ periodo.getYears() +"/"+ periodo.getMonths() +"/"+ periodo.getDays();
     }
     
 
